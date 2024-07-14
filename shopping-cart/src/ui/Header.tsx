@@ -27,7 +27,7 @@ function Header() {
     <Container>
       <Link to="/">Home</Link>
       <span>Shopping Cart</span>
-      <Link to="cart">Cart</Link>
+      <Link to="cart">Cart (0) </Link>
     </Container>
   );
 }
