@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Product } from '../service/productsApi';
+import { useCartContext } from '../context/CartContext';
 
 const Card = styled.div`
   background-color: gainsboro;
@@ -17,6 +18,7 @@ type ProductItemProps = {
 
 export const ProductItem = (props: ProductItemProps) => {
   const { title, image, description, id, price, category } = props.product;
+  const { RemoveFromCart, AddToCart, items } = useCartContext();
   return (
     <Card>
       <h2>{title}</h2>
@@ -28,7 +30,11 @@ export const ProductItem = (props: ProductItemProps) => {
 
       <span>{category}</span>
       <div>
-        <button>Add to Cart</button>
+        {!items.find((item) => item.id === id) ? (
+          <button onClick={() => AddToCart(props.product)}>Add to Cart</button>
+        ) : (
+          <button onClick={() => RemoveFromCart(id)}>Remove from Cart</button>
+        )}
       </div>
     </Card>
   );

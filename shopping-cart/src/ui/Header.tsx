@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useCartContext } from '../context/CartContext';
 
 const Container = styled.div`
   display: flex;
@@ -23,11 +24,16 @@ const Container = styled.div`
 `;
 
 function Header() {
+  const { items } = useCartContext();
+  let itemsCount = 0;
+  if (items) {
+    itemsCount = items.length;
+  }
   return (
     <Container>
       <Link to="/">Home</Link>
       <span>Shopping Cart</span>
-      <Link to="cart">Cart (0) </Link>
+      <Link to="cart">Cart ({itemsCount}) </Link>
     </Container>
   );
 }
